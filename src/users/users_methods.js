@@ -17,4 +17,6 @@ export class UsersDB{
             return response.rows;
         }
     }
+
+    async 
 }

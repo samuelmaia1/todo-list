@@ -30,7 +30,21 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/new', async (req, res) => {
-    
+    const {nome, email, senha, ddd, telefone} = req.body
+
+    const user = {
+        nome,
+        email,
+        senha,
+        ddd,
+        telefone
+    }
+
+    try {
+        await usersDB.create(user)
+    } catch (error) {
+        
+    }
 })
 
 export default router

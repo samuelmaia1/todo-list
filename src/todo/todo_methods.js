@@ -20,4 +20,12 @@ export class TodoDB{
             console.error(error)
         }
     }
+
+    async create(user, todo){
+        try {
+            const insertCommand = `INSERT INTO todos `
+        } catch (error) {
+            console.error(error)
+        }
+    }
 }

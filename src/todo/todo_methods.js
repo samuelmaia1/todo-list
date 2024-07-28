@@ -15,7 +15,7 @@ export class TodoDB{
         try {
             const selectCommand = `SELECT * FROM usuarios_tarefas WHERE id_usuario = '${userID}'`;
             const response = await db.query(selectCommand);
-            return response;
+            return response.rows;
         } catch (error) {
             console.error(error)
         }
@@ -23,7 +23,15 @@ export class TodoDB{
 
     async create(user, todo){
         try {
-            const insertCommand = `INSERT INTO todos `
+            const todoID = randomUUID()
+
+            const insertCommand = `INSERT INTO tarefas (id, titulo, id_usuario, descricao, urgencia, status) VALUES ('${todoID}','${todo.titulo}','${user.id}','${todo.descricao}',${todo.urgencia},'${todo.status}') `
+
+            const insertCommandSecondTable = `INSERT INTO usuarios_tarefas (id_usuario, id_tarefa) VALUES ('${user.id}', '${todoID}')`
+
+            const response = await db.query(insertCommand) && await db.query(insertCommandSecondTable)
+
+            return response
         } catch (error) {
             console.error(error)
         }

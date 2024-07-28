@@ -3,6 +3,7 @@ import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import usersRoute from './users/users_route.js'
+import todosRoute from './todo/todo_route.js'
 
 // Importanto algumas variáveis de ambiente do .env
 dotenv.config()
@@ -18,6 +19,7 @@ server.use(cors())
 
 // Módulo de rotas - usuários
 server.use('/users', usersRoute)
+server.use('/todos', todosRoute)
 
 server.get('/', (req, res) => {
     res

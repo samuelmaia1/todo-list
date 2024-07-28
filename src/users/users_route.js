@@ -29,21 +29,25 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.post('/new', async (req, res) => {
-    const {nome, email, senha, ddd, telefone} = req.body
+router.post('/register', async (req, res) => {
+    const {nome, email, senha, ddd, telefone, login} = req.body;
 
     const user = {
         nome,
         email,
         senha,
         ddd,
-        telefone
-    }
+        telefone,
+        login
+    };
 
     try {
-        await usersDB.create(user)
+        const response = await usersDB.create(user)
+        if (response.rowCount === 1){
+            return res.status(201).json({msg: 'Adicionado com sucesso.'})
+        }
     } catch (error) {
-        
+        console.error(error)
     }
 })
 

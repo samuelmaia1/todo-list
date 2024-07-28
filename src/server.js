@@ -25,7 +25,7 @@ server.get('/', (req, res) => {
     .send(JSON.stringify({
         users: '/users',
         user_url: '/users/{login}',
-        new_users: '/users/new',
+        new_users: '/users/register',
         users_todos: '/users/{login}/todos',
         todo: '/users/{login}/todos/{id}',
         todo_examples: '/todos'

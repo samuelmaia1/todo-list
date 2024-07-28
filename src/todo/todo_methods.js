@@ -5,7 +5,7 @@ export class TodoDB{
     async listAll(){
         try {
             const response = await db.query(`SELECT * FROM tarefas`);
-            return response;
+            return response.rows;
         } catch (error) {
             console.error(error);
         }
@@ -13,11 +13,21 @@ export class TodoDB{
 
     async listUserTodos(userID){
         try {
-            const selectCommand = `SELECT * FROM usuarios_tarefas WHERE id_usuario = '${userID}'`;
+            const selectCommand = `SELECT * FROM tarefas WHERE id_usuario = '${userID}'`;
             const response = await db.query(selectCommand);
             return response.rows;
         } catch (error) {
             console.error(error)
+        }
+    }
+
+    async listEspecificTodo(id){
+        try {
+            const selectCommand = `SELECT * FROM tarefas WHERE id = '${id}'`
+            const response = await db.query(selectCommand)
+            return response.rows;
+        } catch (error) {
+            
         }
     }
 

@@ -15,7 +15,7 @@ router.get('/:login', async (req, res) => {
         if (users.length === 0){
             return res.status(404).end('Erro: usuario nao encontrado')
         }
-        return res.status(200).json(users)
+        return res.status(200).json(users[0])
     } catch (error) {
         console.log(error.message)
         return res.send(error.message)
@@ -31,9 +31,21 @@ router.get('/:login/todos', async (req, res) => {
             return res.status(404).end('Erro: usuario nao encontrado')
         }
         
-        const response = await todosDB.listUserTodos(user.id)
-        console.log(response)
+        const response = await todosDB.listUserTodos(user[0].id)
+        
         return res.status(200).json(response)
+    } catch (error) {
+        console.log(error.message)
+        return res.send(error.message)
+    }
+})
+
+router.get('/:login/todos/:id', async (req, res) => {
+    const {id} = req.params
+    try {
+        const response = await todosDB.listEspecificTodo(id)
+        
+        return res.status(200).json(response[0])
     } catch (error) {
         console.log(error.message)
         return res.send(error.message)

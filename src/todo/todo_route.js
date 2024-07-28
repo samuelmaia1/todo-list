@@ -8,8 +8,10 @@ const todosDB = new TodoDB()
 
 const router = express.Router()
 
-router.post('/', (req, res) => {
-    
+router.get('/', async (req, res) => {
+    const response = await todosDB.listAll();
+
+    return res.status(200).json(response)
 })
 
 export default router
